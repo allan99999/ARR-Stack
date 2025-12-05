@@ -4,6 +4,9 @@
 - [Servarr Wiki](https://wiki.servarr.com/)
 - [Trash Guides](https://trash-guides.info/)
 - [Ascii ART](https://patorjk.com/software/taag/#p=display&f=ANSI%20Shadow)
+-
+- https://www.youtube.com/watch?v=TJ28PETdlGE
+- 
 
 ### Download from GitHub:
 Grab the docker-compose.yml file (provided below)

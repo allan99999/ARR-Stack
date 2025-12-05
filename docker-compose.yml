@@ -147,18 +147,18 @@ services:
 ############################
 # JELLYSEER
 ############################
-    jellyseerr:
-       image: fallenbagel/jellyseerr:latest
-       container_name: Jellyseerr
-     ports:
-     - 5055:5055
-      # network_mode: "service:gluetun"
-       environment:
-            #- LOG_LEVEL=debug
-            - TZ=Africa/Johannesburg          
-       volumes:
-            - /sjare/Docker/Jellyseer/config:/app/config
-       restart: unless-stopped
+  jellyseerr:
+    image: fallenbagel/jellyseerr:latest
+    container_name: Jellyseerr
+    ports:
+      - 5055:5055
+    # network_mode: "service:gluetun"
+    environment:
+    #- LOG_LEVEL=debug
+      - TZ=Africa/Johannesburg          
+    volumes:
+      - /sjare/Docker/Jellyseer/config:/app/config
+    restart: unless-stopped
     
 ############################
 # GLUETUN

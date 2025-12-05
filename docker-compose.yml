@@ -18,7 +18,7 @@ services:
     volumes:
       - /share/Docker/Radarr/config:/config
       - /share/Movies:/movies #optional
-      - /share/Downloads:/downloads #optional
+      - /share/Download:/downloads #optional
     restart: unless-stopped
     
 ############################
@@ -38,7 +38,7 @@ services:
     volumes:
       - /share/Docker/Sonarr/config:/config
       - /share/Series:/tv #optional
-      - /share/Downloads:/downloads #optional
+      - /share/Download:/downloads #optional
     restart: unless-stopped
     
 ############################
@@ -96,7 +96,7 @@ services:
     volumes:
       - /share/Docker/Lidarr/config:/config
       - /share/Music:/music #optional
-      - /share/Downloads:/downloads #optional
+      - /share/Download:/downloads #optional
     restart: unless-stopped
     
 ############################
@@ -119,7 +119,7 @@ services:
       - TORRENTING_PORT=6881
     volumes:
       - /share/Docker/Qbittorrent/config:/config
-      - /share/Downloads:/downloads #optional
+      - /share/Download:/downloads #optional
     restart: unless-stopped
     
 ############################

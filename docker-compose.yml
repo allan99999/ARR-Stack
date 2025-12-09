@@ -200,7 +200,7 @@ services:
   homarr:
     container_name: homarr
     # CHANGED: Pinned to version 0.15 instead of latest
-    image: ghcr.io/homarr-labs/homarr:0.15
+    image: ghcr.io/ajnart/homarr:latest
     restart: unless-stopped
     volumes:
       - /home/allan/Docker/Homarr/config:/app/data/configs

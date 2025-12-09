@@ -195,11 +195,12 @@ services:
     restart: unless-stopped
 
 ############################
-# HOMARR
+# HOMARR (Stable v0.15)
 ############################
   homarr:
     container_name: homarr
-    image: ghcr.io/homarr-labs/homarr:latest
+    # CHANGED: Pinned to version 0.15 instead of latest
+    image: ghcr.io/homarr-labs/homarr:0.15
     restart: unless-stopped
     volumes:
       - /home/allan/Docker/Homarr/config:/app/data/configs

@@ -202,7 +202,7 @@ services:
     image: ghcr.io/homarr-labs/homarr:latest
     restart: unless-stopped
     volumes:
-      - /home/allan/Docker/Homarr/config:/data/config
+      - /home/allan/Docker/Homarr/config:/app/data/configs
       - /home/allan/Docker/Homarr/icons:/app/public/icons
       - /home/allan/Docker/Homarr/data:/data
       - /var/run/docker.sock:/var/run/docker.sock

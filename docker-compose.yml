@@ -14,8 +14,9 @@ services:
       - TZ=Africa/Johannesburg 
     volumes:
       - /home/allan/Docker/Radarr/config:/config
-      - /home/allan/Movies:/movies
-      - /home/allan/Download:/downloads
+      # NFS MOUNTS
+      - nas_movies:/movies
+      - nas_downloads:/downloads
     networks:
       arr_net:
         ipv4_address: 172.28.0.2
@@ -35,8 +36,9 @@ services:
       - TZ=Africa/Johannesburg
     volumes:
       - /home/allan/Docker/Sonarr/config:/config
-      - /home/allan/Series:/data/series
-      - /home/allan/Download:/downloads
+      # NFS MOUNTS
+      - nas_series:/data/series
+      - nas_downloads:/downloads
     networks:
       arr_net:
         ipv4_address: 172.28.0.3
@@ -75,8 +77,9 @@ services:
       - TZ=Africa/Johannesburg
     volumes:
       - /home/allan/Docker/Bazarr/config:/config
-      - /home/allan/Movies:/movies
-      - /home/allan/Series:/data/series
+      # NFS MOUNTS
+      - nas_movies:/movies
+      - nas_series:/data/series
     networks:
       arr_net:
         ipv4_address: 172.28.0.5
@@ -96,20 +99,20 @@ services:
       - TZ=Africa/Johannesburg
     volumes:
       - /home/allan/Docker/Lidarr/config:/config
-      - /home/allan/Music:/music
-      - /home/allan/Download:/downloads
+      # NFS MOUNTS
+      - nas_music:/music
+      - nas_downloads:/downloads
     networks:
       arr_net:
         ipv4_address: 172.28.0.6
     restart: unless-stopped
 
 ############################
-# QBITTORRENT (No VPN - Direct Test)
+# QBITTORRENT
 ############################
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
-    # Standard ports restored
     ports:
      - 8080:8080
      - 6881:6881
@@ -122,8 +125,8 @@ services:
       - TORRENTING_PORT=6881
     volumes:
       - /home/allan/Docker/qbittorrent/config:/config
-      - /home/allan/Download:/downloads
-    # Assigned the IP that Gluetun usually holds
+      # NFS MOUNT
+      - nas_downloads:/downloads
     networks:
       arr_net:
         ipv4_address: 172.28.0.7
@@ -143,7 +146,8 @@ services:
       - NZBGET_PASS=tegbzn6789
     volumes:
       - /home/allan/Docker/nzbget/config:/config
-      - /home/allan/Download:/downloads
+      # NFS MOUNT
+      - nas_downloads:/downloads
     ports:
       - 6789:6789
     networks:
@@ -163,9 +167,12 @@ services:
       - TZ=Africa/Johannesburg
     volumes:
       - /home/allan/Docker/Jellyfin/config:/config
-      - /home/allan/Series:/data/series
-      - /home/allan/Movies:/data/movies
-      - /home/allan/Music:/data/music
+      # NFS MOUNTS
+      - nas_series:/data/series
+      - nas_movies:/data/movies
+      - nas_music:/data/music
+      - nas_books:/data/books
+      - nas_pictures:/data/pictures
     ports:
       - 8096:8096
       - 8920:8920
@@ -188,7 +195,6 @@ services:
       - TZ=Africa/Johannesburg
       - LOG_LEVEL=info
     volumes:
-      # FIXED: Internal path must be /app/config
       - /home/allan/Docker/jellyseerr/config:/app/config
     networks:
       arr_net:
@@ -200,7 +206,6 @@ services:
 ############################
   homarr:
     container_name: homarr
-    # CHANGED: Pinned to version 0.15 instead of latest
     image: ghcr.io/ajnart/homarr:latest
     restart: unless-stopped
     volumes:
@@ -242,3 +247,49 @@ networks:
     ipam:
       config:
         - subnet: 172.28.0.0/16
+
+############################
+# NAS STORAGE (NFS - Synology/QNAP path style)
+############################
+volumes:
+  nas_movies:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=192.168.1.10,nolock,soft,rw
+      device: ":/volume1/Movies"
+  
+  nas_series:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=192.168.1.10,nolock,soft,rw
+      device: ":/volume1/Series"
+
+  nas_downloads:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=192.168.1.10,nolock,soft,rw
+      device: ":/volume1/Downloads"
+
+  nas_music:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=192.168.1.10,nolock,soft,rw
+      device: ":/volume1/Music"
+
+  nas_books:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=192.168.1.10,nolock,soft,rw
+      device: ":/volume1/Books"
+
+  nas_pictures:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=192.168.1.10,nolock,soft,rw
+      device: ":/volume1/Pictures"

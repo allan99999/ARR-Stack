@@ -182,14 +182,13 @@ yservices:
   jellyseerr:
     image: fallenbagel/jellyseerr:latest
     container_name: jellyseerr
-    init: true
     ports:
       - 5055:5055
     environment:
       - TZ=Africa/Johannesburg
       - LOG_LEVEL=info
     volumes:
-      - /home/allan/Docker/Seerr/config:/app/config
+      - /home/allan/Docker/jellyseerr/config:/config
     networks:
       arr_net:
         ipv4_address: 172.28.0.10
@@ -203,7 +202,7 @@ yservices:
     image: ghcr.io/homarr-labs/homarr:latest
     restart: unless-stopped
     volumes:
-      - /home/allan/Docker/Homarr/configs:/app/data/configs
+      - /home/allan/Docker/Homarr/config:/data/config
       - /home/allan/Docker/Homarr/icons:/app/public/icons
       - /home/allan/Docker/Homarr/data:/data
       - /var/run/docker.sock:/var/run/docker.sock

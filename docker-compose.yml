@@ -5,7 +5,7 @@ services:
 ############################
   radarr:
     image: lscr.io/linuxserver/radarr:latest
-    container_name: Radarr
+    container_name: radarr
     ports:
      - 7878:7878
     environment:
@@ -26,7 +26,7 @@ services:
 ############################
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
-    container_name: Sonarr
+    container_name: sonarr
     ports:
      - 8989:8989
     environment:
@@ -66,7 +66,7 @@ services:
 ############################
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
-    container_name: Bazarr
+    container_name: bazarr
     ports: 
       - 6767:6767
     environment:
@@ -87,7 +87,7 @@ services:
 ############################
   lidarr:
     image: lscr.io/linuxserver/lidarr:latest
-    container_name: Lidarr
+    container_name: lidarr
     ports:
      - 8686:8686
     environment:
@@ -108,7 +108,7 @@ services:
 ############################
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
-    container_name: Qbittorrent
+    container_name: qbittorrent
     # Standard ports restored
     ports:
      - 8080:8080
@@ -121,7 +121,7 @@ services:
       - WEBUI_PORT=8080
       - TORRENTING_PORT=6881
     volumes:
-      - /home/allan/Docker/Qbittorrent/config:/config
+      - /home/allan/Docker/qbittorrent/config:/config
       - /home/allan/Download:/downloads
     # Assigned the IP that Gluetun usually holds
     networks:
@@ -156,7 +156,7 @@ services:
 ############################
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
-    container_name: Jellyfin
+    container_name: jellyfin
     environment:
       - PUID=1000
       - PGID=1000
@@ -181,7 +181,7 @@ services:
 ############################
   seerr:
     image: image: fallenbagel/jellyseerr:latest
-    container_name: seerr
+    container_name: jellyseerr
     init: true
     ports:
       - 5055:5055

@@ -14,7 +14,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Etc/UTC
+      - TZ=Etc/UTC 
     volumes:
       - /share/Docker/Radarr/config:/config
       - /share/Movies:/movies #optional
@@ -37,7 +37,7 @@ services:
       - TZ=Etc/UTC
     volumes:
       - /share/Docker/Sonarr/config:/config
-      - /share/Series:/tv #optional
+      - /share/Series:/data/series #optional
       - /share/Download:/downloads #optional
     restart: unless-stopped
     
@@ -76,7 +76,7 @@ services:
     volumes:
       - /share/Docker/Bazarr/config:/config
       - /share/Movies:/movies #optional
-      - /share/Series:/tv #optional
+      - /share/Series:/data/series #optional
     restart: unless-stopped
     
 ############################
@@ -160,8 +160,10 @@ services:
       - TZ=Etc/UTC
     volumes:
       - /share/Docker/Jellyfin/config:/config
-      - /share/Series:/data/tvshows
+      - /share/Series:/data/series
       - /share/Movies:/data/movies
+      - /share/Music:/data/music
+      
     ports:
       - 8096:8096
       - 8920:8920 #optional

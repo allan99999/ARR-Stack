@@ -180,7 +180,7 @@ services:
 # SEERR
 ############################
   seerr:
-    image: ghcr.io/seerr-team/seerr:latest
+    image: image: fallenbagel/jellyseerr:latest
     container_name: seerr
     init: true
     ports:

@@ -180,7 +180,7 @@ yservices:
 # SEERR
 ############################
   jellyseerr:
-    image: image: fallenbagel/jellyseerr:latest
+    image: fallenbagel/jellyseerr:latest
     container_name: jellyseerr
     init: true
     ports:

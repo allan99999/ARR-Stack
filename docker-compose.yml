@@ -177,7 +177,7 @@ services:
     restart: unless-stopped
 
 ############################
-# SEERR
+# JELLYSEER
 ############################
   jellyseerr:
     image: fallenbagel/jellyseerr:latest
@@ -188,7 +188,8 @@ services:
       - TZ=Africa/Johannesburg
       - LOG_LEVEL=info
     volumes:
-      - /home/allan/Docker/jellyseerr/config:/config
+      # FIXED: Internal path must be /app/config
+      - /home/allan/Docker/jellyseerr/config:/app/config
     networks:
       arr_net:
         ipv4_address: 172.28.0.10

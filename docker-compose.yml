@@ -1,6 +1,28 @@
 services:
 
 ############################
+# TRAEFIK (The Reverse Proxy)
+############################
+  traefik:
+    image: traefik:v2.10
+    container_name: traefik
+    command:
+      - "--api.insecure=true" # Enables the Dashboard on port 8080
+      - "--providers.docker=true" # Tells Traefik to listen to Docker
+      - "--providers.docker.exposedbydefault=false" # Only expose containers with specific labels
+      - "--entrypoints.web.address=:80" # Listen on port 80 for traffic
+    ports:
+      - "80:80"     # The HTTP port
+      - "8081:8081" # The Dashboard port
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro # Required to talk to Docker
+    networks:
+      arr_net:
+        ipv4_address: 172.28.0.254
+    restart: unless-stopped
+
+
+############################
 # RADARR
 ############################
   radarr:
